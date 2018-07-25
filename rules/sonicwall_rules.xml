@@ -1,0 +1,132 @@
+<!-- @(#) $Id: ./etc/rules/sonicwall_rules.xml, 2011/09/08 dcid Exp $
+
+  -  Official SonicWall rules for OSSEC.
+  -
+  -  Copyright (C) 2009 Trend Micro Inc.
+  -  All rights reserved.
+  -
+  -  This program is a free software; you can redistribute it
+  -  and/or modify it under the terms of the GNU General Public
+  -  License (version 2) as published by the FSF - Free Software
+  -  Foundation.
+  -
+  -  License details: http://www.ossec.net/en/licensing.html
+  -->
+  
+
+<!-- SonicWall Log messages -->
+<group name="syslog,sonicwall,">
+  <rule id="4800" level="0">
+    <decoded_as>sonicwall</decoded_as>
+    <description>SonicWall messages grouped.</description>
+  </rule>
+
+  <rule id="4801" level="8">
+    <if_sid>4800</if_sid>
+    <status>^1</status>
+    <description>SonicWall critical message.</description>
+  </rule>
+  
+  <rule id="4802" level="8">
+    <if_sid>4800</if_sid>
+    <status>^2</status>
+    <description>SonicWall critical message.</description>
+  </rule>
+  
+ <rule id="4803" level="4">
+    <if_sid>4800</if_sid>
+    <status>^3</status>
+    <description>SonicWall error message.</description>
+  </rule>
+
+  <rule id="4804" level="3">
+    <if_sid>4800</if_sid>
+    <status>^4</status>
+    <description>SonicWall warning message.</description>
+  </rule>
+
+  <rule id="4805" level="0">
+    <if_sid>4800</if_sid>
+    <status>^5</status>
+    <description>SonicWall notice message.</description>
+  </rule>
+  
+  <rule id="4806" level="0">
+    <if_sid>4800</if_sid>
+    <status>^6</status>
+    <description>SonicWall informational message.</description>
+  </rule>
+  
+  <rule id="4807" level="0">
+    <if_sid>4800</if_sid>
+    <status>^7</status>
+    <description>SonicWall debug message.</description>
+  </rule>
+  
+  <rule id="4810" level="0">
+    <if_sid>4806</if_sid>
+    <id>^236$</id>
+    <description>Firewall administrator login.</description>
+    <group>authentication_success,</group>
+  </rule>
+
+  <rule id="4811" level="0">
+    <if_sid>4801</if_sid>
+    <id>^30$|^32$</id>
+    <description>Firewall authentication failure.</description>
+    <group>authentication_failed,</group>
+  </rule>
+
+  <rule id="4813" level="5" timeframe="120" ignore="60">
+    <regex>Non-config mode GUI administration session started\.</regex>
+    <description>Firewall User Logged-In</description>
+  </rule>
+
+  <rule id="4814" level="4" timeframe="120" ignore="60">
+    <regex>User logged out\.</regex>
+    <description>Firewall User Logged-Out</description>
+  </rule>
+
+  <rule id="4815" level="5" timeframe="120" ignore="60">
+    <regex>Configuration mode administration session started\.</regex>
+    <description>Firewall Administrator Logged-In</description>
+  </rule>
+
+  <rule id="4816" level="10">
+    <regex>Access rule modified\.</regex>
+    <description>Firewall Configuration Rule Modified</description>
+  </rule>
+
+  <rule id="4817" level="10" timeframe="120" ignore="60">
+    <regex>systemd[1]: Started OpenVPN service\.</regex>
+    <description>Peer Connections Initiated</description>
+  </rule>
+
+  <rule id="4818" level="13">
+    <regex>User login denied due to bad credentials\.</regex>
+    <description>Firewall login failure</description>
+  </rule>
+
+  <rule id="4819" level="13">
+    <regex>Administrator login denied due to bad credentials\.</regex>
+    <description>Firewall login failure</description>
+  </rule>
+
+  <rule id="4820" level="13">
+    <regex>Nestea/Teardrop attack dropped\.</regex>
+    <description>Possible Teardrop attack dropped by firewall</description>
+  </rule>
+
+<!--
+  <rule id="4850" level="10" frequency="6" timeframe="120" ignore="60">
+    <description>Multiple firewall warning messages.</description>
+    <group>service_availability,</group>
+  </rule> -->
+  
+  <rule id="4851" level="14" frequency="6" timeframe="120" ignore="60">
+    <if_matched_sid>4819</if_matched_sid>
+    <description>Multiple firewall logins - Bruteforce.</description>
+  </rule>
+</group> <!-- SonicWall -->
+
+<!-- EOF -->

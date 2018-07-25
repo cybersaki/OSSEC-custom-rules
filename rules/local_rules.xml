@@ -1,0 +1,160 @@
+<!-- @(#) $Id: ./etc/rules/local_rules.xml, 2011/09/08 dcid Exp $
+
+  -  Example of local rules for OSSEC.
+  -
+  -  Copyright (C) 2009 Trend Micro Inc.
+  -  All rights reserved.
+  -
+  -  This program is a free software; you can redistribute it
+  -  and/or modify it under the terms of the GNU General Public
+  -  License (version 2) as published by the FSF - Free Software
+  -  Foundation.
+  -
+  -  License details: http://www.ossec.net/en/licensing.html
+  -->
+
+
+<!-- Modify it at your will. -->
+
+<group name="local,syslog,">
+
+  <!-- Note that rule id 5711 is defined at the ssh_rules file
+    -  as a ssh failed login. This is just an example
+    -  since ip 1.1.1.1 shouldn't be used anywhere.
+    -  Level 0 means ignore.
+    -->
+  <rule id="100001" level="0">
+    <if_sid>5711</if_sid>
+    <srcip>1.1.1.1</srcip>
+    <description>Example of rule that will ignore sshd </description>
+    <description>failed logins from IP 1.1.1.1.</description>
+  </rule>
+
+  <rule id="31166" level="15">
+    <if_sid>31108</if_sid>
+    <regex>"\(\)\s*{\s*:;\s*}\s*;</regex>
+    <description>Shellshock attack detected</description>
+    <group>attack,pci_dss_11.4,</group>
+  </rule>
+
+  <rule id="140125" level="14">
+    <if_sid>530</if_sid>
+    <match>ossec: output: 'reg QUERY</match>
+    <check_diff />
+    <description>New USB device connected</description>
+  </rule>
+
+<!-- Ithunga niraya alert kaatum. Namma apdikaa povom. Aproma reopen panlaam -->
+
+<!--  <rule id="1844" level="12">
+  <if_sid>18100</if_sid>
+  <status>/services.exe</status>
+  <description>Sysmon - Suspicious Process - services.exe</description>
+  <group>pci_dss_10.6.1,pci_dss_11.4,</group>
+  </rule>
+
+  <rule id="1847" level="0">
+  <if_sid>1844</if_sid>
+  <extra_data>wininit.exe</extra_data>
+  <description>Sysmon - Legitimate Parent Image - services.exe</description>
+  </rule>
+
+-->
+
+<!-- Too dangerous down here -->
+
+<rule id="100220" level="0">
+    <if_sid>18104</if_sid>
+    <id>^4659$|^4663$</id>
+    <regex>Access Request Information:\.*Accesses:\s*\t*%%4417|</regex>
+    <info>%%4417 maps to "WriteData or AddFile"</info>
+    <regex>Access Request Information:\.*Accesses:\s*\t</regex>
+    <info>maps to "AppendData or AddSubDirectory"</info>
+    <description>FIM: Audited file has been CHANGED or a new file/directory ADDED.</description>
+    <group>syscheck,</group>
+  </rule>
+
+  <rule id="100221" level="0">
+    <if_sid>18104</if_sid>
+    <id>^4659$|^4663$</id>
+    <regex>Access Request Information:\.*Accesses:\s*\t*%%1537</regex>
+    <info>%%1537 maps to "DELETE"</info>
+    <description>FIM: Audited file has been DELETED.</description>
+    <group>syscheck,</group>
+  </rule>
+
+</group> <!-- SYSLOG,LOCAL -->
+
+
+<!--
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.Enaku end eh kedayathu
+.
+.
+.
+.
+.
+.
+.
+.
+.
+-->
+
+
+<!-- EOF -->
+
+<group name="local,syslog,">
+<!--
+<rule id="166789" level="7" timeframe="120" ignore="60">
+ <regex>Non-config mode GUI administration session started\.</regex>
+ <description>Firewall user logged-in</description>
+</rule>
+
+<rule id="166788" level="7" timeframe="120" ignore="60">
+ <regex>User logged out\.</regex>
+ <description>Firewall user logged-out</description>
+</rule>
+
+<!-- <rule id="166787" level="7" timeframe="120" ignore="60">
+ <regex>Configuration mode administration session started\.</regex>
+ <description>Firewall administrator logged-in</description>
+</rule>
+
+<rule id="166786" level="7">
+ <regex>Access rule modified\.</regex>
+ <description>Firewall Configuration rule modified</description>
+</rule>
+-->
+<rule id="666555" level="12" timeframe="120" ignore="60">
+ <regex>systemd[1]: Started OpenVPN service\.</regex>
+ <description>Peer connections initiated</description>
+</rule>
+
+</group>
+
+
+<!-- 
+<regex>openvpn --remote\.</regex>
+-->
+
+<group name="Install_MSI">
+<rule id= "100007" level="7" timeframe="120" ignore="60">
+<if_sid>18101</if_sid>
+<match>Windows Installer</match>
+<description>New Software Installed</description>
+</rule>
+</group>

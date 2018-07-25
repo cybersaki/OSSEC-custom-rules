@@ -1,0 +1,8 @@
+
+<group name="windows-EvtLog-4663"
+<rule id="90015" level="7">
+       <if_sid>90000</if_sid>
+       <match>Accesses: %%4416</match>
+       <description>Windows User attempted to access an object</description>
+   </rule>
+  </group>

@@ -1,0 +1,58 @@
+<!--
+
+<group name="powershell,">
+  <rule id="100210" level="2">
+    <if_sid>18100,18101</if_sid>
+    <match>CommandType=Script</match>
+    <description>Powershell Script.</description>
+  </rule>
+  <rule id="100211" level="2">
+    <if_sid>18100,18101</if_sid>
+    <match>CommandType=Cmdlet</match>
+    <description>Powershell Command.</description>
+  </rule>
+  <rule id="100212" level="2">
+    <if_sid>18100,18101</if_sid>
+    <match>CommandType=Function</match>
+    <description>Powershell Function.</description>
+  </rule>  
+  <rule id="100213" level="2">
+    <if_sid>100210</if_sid>
+    <match>NewCommandState=Started</match>
+    <description>Powershell Script (500-Started).</description>
+  </rule>
+  <rule id="100214" level="2">
+    <if_sid>100210</if_sid>
+    <match>NewCommandState=Stopped</match>
+    <description>Powershell Script (501-Stopped).</description>
+  </rule>  
+  <rule id="100215" level="2">
+    <if_sid>100211</if_sid>
+    <match>NewCommandState=Started</match>
+    <description>Powershell Command (500-Started).</description>
+  </rule>
+  <rule id="100216" level="2">
+    <if_sid>100211</if_sid>
+    <match>NewCommandState=Stopped</match>
+    <description>Powershell Command (501-Stopped).</description>
+  </rule>  
+  <rule id="100217" level="2">
+    <if_sid>100212</if_sid>
+    <match>NewCommandState=Started</match>
+    <description>Powershell Function (500-Started).</description>
+  </rule>
+  <rule id="100218" level="2">
+    <if_sid>100212</if_sid>
+    <match>NewCommandState=Stopped</match>
+    <description>Powershell Function (501-Stopped).</description>
+  </rule>
+
+ <rule id="100210" level="6">
+  <id>^400$|^403$|^500$|^501$|^600$</id>
+  <description>Powershell Event.</description>
+</rule>
+
+-->
+
+</group> <!-- POWERSHELL -->
+
