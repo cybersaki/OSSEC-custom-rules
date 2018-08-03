@@ -61,6 +61,18 @@
 
 -->
 
+ <rule id="180145" level="15">
+    <if_sid>18145</if_sid>
+    <regex>demand start to auto start</regex>
+    <description>Antivirus disabled</description>
+  </rule>
+
+<rule id="180146" level="11">
+    <if_sid>18145</if_sid>
+    <regex>auto start to demand start</regex>
+    <description>Antivirus enabled</description>
+  </rule>
+  
 <!-- Too dangerous down here -->
 
 <rule id="100220" level="0">
