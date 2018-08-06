@@ -1,1 +1,1 @@
-#Ossec scripts for daily activities
+Ossec scripts for daily activities
